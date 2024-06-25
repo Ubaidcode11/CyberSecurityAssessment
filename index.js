@@ -74,7 +74,7 @@ const quizData = [
       b: "Allow the person to enter your home to conduct the check",
       c: "Share the news with your neighbours about the worker's visit",
       d: "Provide electric meter information to the person without verifying their identity",
-      correct: "b"
+      correct: "a"
     },   
     {
       question: "A caller posing as your internet service provider claims your account is compromised and asks for remote computer access to resolve the issue. What action should you take?",
