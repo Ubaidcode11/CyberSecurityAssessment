@@ -592,7 +592,7 @@ function saveQuizResults(employeeID, score, percentage) {
 // Example function to handle saving quiz results when quiz is completed
 function handleQuizCompletion(employeeID, score, quizLength) {
   // Calculate percentage
-  const percentage = (score / quizLength) * 100;
+  const percentage = Math.round((score / quizLength) * 100);
 
   // Save quiz results to Firestore
   saveQuizResults(employeeID, score, percentage);
