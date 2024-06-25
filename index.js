@@ -70,12 +70,12 @@ const quizData = [
     },
     {
       question: "You receive a knock on your door from someone claiming to be a utility worker who needs to enter your home to check your electrical meter. What should you do?",
-      a: "Allow the person to enter your home to conduct the check",
-      b: "Request to see the person's official identification badge before allowing them entry",
+      a: "Request to see the person's official identification badge before allowing them entry",
+      b: "Allow the person to enter your home to conduct the check",
       c: "Share the news with your neighbours about the worker's visit",
       d: "Provide electric meter information to the person without verifying their identity",
       correct: "b"
-    },
+    },   
     {
       question: "A caller posing as your internet service provider claims your account is compromised and asks for remote computer access to resolve the issue. What action should you take?",
 
@@ -91,38 +91,38 @@ const quizData = [
       question:"You're browsing and on a random site a pop-up to get free access to Netflix appears. What's the most secure action?",
 
       a: "Follow the pop-up instructions to get the free access",
-      b: "Immediately close the pop-up and do not proceed",
-      c: "Share the pop-up link with your friends",
+      b: "Share the pop-up link with your friends",
+      c: "Immediately close the pop-up and do not proceed",
       d: "Click on any links provided within the Pop-up",
-
-      correct: "b"
+    
+      correct: "c"
     },
     {
       question: "While using a public Wi-Fi network at a coffee shop, you receive a prompt on your device asking you to update your software. What should you do?",
-
-      a: "Immediately proceed with the software update",
-      b: "Delay the update until you're on a secure network",
+      
+      a: "Delay the update until you're on a secure network",
+      b: "Immediately proceed with the software update",
       c: "Ignore the update prompt and continue using the Wi-Fi",
       d: "Disconnect from the Wi-Fi network to avoid potential risks",
-      correct: "b"
+      correct: "a"
     },
     {
      question: "You receive an email with a link to a survey promising a gift card reward upon completion. What should you do?",
     a: "Click on the link and complete the survey to claim your reward",
-    b: "Delete the email and mark it as spam",
+    b: "Contact the company for more information regarding the gift card",
     c: "Forward the email to your contacts to spread the opportunity",
-    d: "Contact the company for more information regarding the gift card",
-
-   correct: "b"
+    d: "Delete the email and mark it as spam",
+    
+   correct: "d"
     },
     {
      question:"While installing a new application on your smartphone, you're prompted to grant extensive permissions to access your personal data. What should you do?",
-
-     a: "Grant all permissions to install the application",
-     b: "Review the permissions requested and only grant those necessary for the app's function",
+     
+     a: "Review the permissions requested and only grant those necessary for the app's function",
+     b: "Grant all permissions to install the application",
      c: "Deny all permissions and refrain from installing the application",
      d: "Grant permissions and monitor the app's behavior afterward",
-    correct: "b"
+    correct: "a"
     },
     {
       question: "You’re being texted that your parcel delivery will be delayed. In order to expedite it you need to?",
@@ -153,12 +153,12 @@ const quizData = [
     },
     {
       question: "You're at a public event and need to charge your phone. You notice a charging station with multiple USB cables available. What should you do?",
-      a: "Use the USB cables from the charging station to charge your phone",
-      b: "Avoid using the charging station to prevent potential data theft",
+      a: "Avoid using the charging station to prevent potential data theft",
+      b: "Use the USB cables from the charging station to charge your phone",
       c: "Share the charging station with other attendees to ensure everyone's devices are charged",
       d: "Plug your phone into the charging station and leave it unattended while you attend to other activities",
-      correct : "b"
-    },
+      correct : "a"
+    },   
     {
       "question": "You receive a letter in the mail claiming to be from your bank, asking you to update your account information by filling out a form and mailing it back. What should you do?",
       "a": "Fill out the form and mail it back as instructed",
