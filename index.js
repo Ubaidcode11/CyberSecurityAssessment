@@ -319,7 +319,7 @@ function nextQuestion() {
     const headerTxt = document.querySelector(".header-txt");
     headerTxt.textContent = "Results";
     headerTxt.style.fontSize = "30px";
-    const scorePercentage = (score / quizData.length) * 100;
+    const scorePercentage = Math.round((score / quizData.length) * 100);
     quiz.innerHTML = `<h1>You answered ${score}/${quizData.length} questions correctly</h1>
     <div style="text-align: justify; padding-bottom:20px">
     <h1>Your Score Percentage is ${scorePercentage}%</h1>
@@ -453,7 +453,7 @@ function displayResults() {
   const headerTxt = document.querySelector(".header-txt");
   headerTxt.textContent = "Results";
   headerTxt.style.fontSize = "30px";
-  const scorePercentage = (score / quizData.length) * 100;
+  const scorePercentage = Math.round((score / quizData.length) * 100);
   quiz.innerHTML = `<h1>You answered ${score}/${quizData.length} questions correctly</h1>
   <div style="text-align: justify; padding-bottom:20px">
   <h1>Your Score Percentage is ${scorePercentage}%</h1>
