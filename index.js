@@ -527,53 +527,40 @@ const firebaseConfig = {
 
 
 
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// DOM elements
+
 
 const scoreForm = document.getElementById('scoreForm');
 const employeeIDInput = document.getElementById('employeeID');
 const startAssessmentBtn = document.getElementById('startAssessmentBtn');
 
-//const backBtn = document.getElementById('backBtn');
+
 const employeeIDDisplay = document.getElementById('employeeIDDisplay');
 
-// Hide quiz container and popup initially
-// popupContainer.style.display = 'none';
 
-// Start assessment button click handler
 startAssessmentBtn.addEventListener('click', function() {
     const employeeID = employeeIDInput.value.trim();
 
-    // Validate employee ID (optional, add your own validation logic)
+    
     if (employeeID === '') {
         alert('Please enter Employee ID.');
         return;
     }
 
-    // // Display employee ID in quiz footer
-    // // employeeIDDisplay.textContent = `Employee ID: ${employeeID}`;
-  
-    // // Hide the popup and show the quiz container
-    // popupContainer.style.display = 'none';
-    // // quizContainer.style.display = 'block';
 
-    // // Enable next button (and back button if needed)
-    // nextBtn.disabled = false;
-
-    // Start the quiz
     startQuiz();
     // startTimer();
 });
 
 
 function saveQuizResults(employeeID, score, percentage) {
-  // Add a new document with a generated ID to the "quizResults" collection
+  
   
     console.log("Saving quiz results:", employeeID, score, percentage);
-    // Add document to Firestore
+  
     db.collection("quizResults").add({
       employeeID: employeeID,
       score: score,
@@ -589,32 +576,19 @@ function saveQuizResults(employeeID, score, percentage) {
   }
 
 
-// Example function to handle saving quiz results when quiz is completed
+
 function handleQuizCompletion(employeeID, score, quizLength) {
-  // Calculate percentage
+  
   const percentage = Math.round((score / quizLength) * 100);
 
-  // Save quiz results to Firestore
+
   saveQuizResults(employeeID, score, percentage);
 }
 
-// Example: Assume you have a function to display final results and call this when quiz is completed
-// function displayResultsAndSave(employeeID, score, quizLength) {
-//   const scorePercentage = (score / quizLength) * 100;
-//   console.log(`Employee ID: ${employeeID}, Score: ${score}/${quizLength}, Percentage: ${scorePercentage}%`);
 
-//   // Display or do other actions as needed
-//   // For example, update UI to show quiz results
-
-//   // Save quiz results to Firestore
-//   handleQuizCompletion(employeeID, score, quizLength);
-// }
-
-// Example usage: Call this function when quiz is completed
-// Replace with your actual logic to determine when the quiz is completed
 function quizCompleted() {
-  const employeeID = employeeIDInput.value.trim(); // Assuming you capture employee ID
-  const quizLength = quizData.length; // Assuming quizData is available
+  const employeeID = employeeIDInput.value.trim(); 
+  const quizLength = quizData.length; 
   
 }
 
