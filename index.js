@@ -488,7 +488,7 @@ function markSavedAnswer() {
 
 function previousQuestion() {
   console.log("Navigating to previous question...");
-  saveAnswer();
+  // saveAnswer();
   currentQuiz--;
 
   if (currentQuiz >= 0) {
