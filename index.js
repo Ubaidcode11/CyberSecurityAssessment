@@ -307,8 +307,10 @@ function nextQuestion() {
   if (unansweredQuestions > 0 && currentQuiz === quizData.length - 1) {
     const confirmation = confirm(`You have ${unansweredQuestions} unanswered question(s). Are you sure you want to view results?`);
     if (!confirmation) {
+      // resumeTimer();
       return; 
     }
+    stopTimer();
   }
 
   currentQuiz++;
@@ -335,7 +337,7 @@ function nextQuestion() {
     btnSubmit.innerText = "View Results";
     btnSubmit.addEventListener("click", function () {
       console.log("Submit button clicked");
-      stopTimer();
+      // stopTimer();
       const answers = getSelected();
     
       if (answers) {
@@ -402,7 +404,7 @@ function saveAnswer() {
 }
 
 let timerRunning = true;
-
+let remainingTimeInSeconds = 20 * 60;
 
 function startTimer(duration) {
   let timer = duration, minutes, seconds;
@@ -448,6 +450,9 @@ function stopTimer() {
   timerRunning = false;
 }
 
+function resumeTimer() {
+  startTimer(remainingTimeInSeconds);
+}
 
 function displayResults() {
   const headerTxt = document.querySelector(".header-txt");
@@ -514,7 +519,6 @@ function previousQuestion() {
     backBtn.disabled = true;
   }
 }
-
 
 
 
