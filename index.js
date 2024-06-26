@@ -191,7 +191,7 @@ function startQuiz() {
   nextBtn.disabled = false;
   // backBtn.disabled=false;
 
-  startTimer(20 * 60);
+  startTimer(0.1 * 60);
   document.getElementById('popupContainer').style.display = 'none';
   document.getElementById('quiz-container').style.display = 'block';
   
@@ -460,7 +460,9 @@ function displayResults() {
   </div>
   <button type="button" onclick="location.reload()">Reload</button>`;
   footerEl.style.display = "none";
-  handleQuizCompletion(employeeID, score, quizLength);
+  stopTimer();
+  const quizLength = quizData.length;
+  handleQuizCompletion(employeeIDInput.value.trim(), score, quizLength);
 }
 
 function markSavedAnswer() {
@@ -515,6 +517,8 @@ function previousQuestion() {
 
 
 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAyh0KTPXxQRQHroqUaG_zQB4PJKMsB_qQ",
   authDomain: "quiz-94195.firebaseapp.com",
@@ -526,8 +530,6 @@ const firebaseConfig = {
 };
 
 
-
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -537,14 +539,16 @@ const scoreForm = document.getElementById('scoreForm');
 const employeeIDInput = document.getElementById('employeeID');
 const startAssessmentBtn = document.getElementById('startAssessmentBtn');
 
-
+//const backBtn = document.getElementById('backBtn');
 const employeeIDDisplay = document.getElementById('employeeIDDisplay');
+
+
 
 
 startAssessmentBtn.addEventListener('click', function() {
     const employeeID = employeeIDInput.value.trim();
 
-    
+   
     if (employeeID === '') {
         alert('Please enter Employee ID.');
         return;
@@ -557,10 +561,10 @@ startAssessmentBtn.addEventListener('click', function() {
 
 
 function saveQuizResults(employeeID, score, percentage) {
-  
+ 
   
     console.log("Saving quiz results:", employeeID, score, percentage);
-  
+
     db.collection("quizResults").add({
       employeeID: employeeID,
       score: score,
@@ -578,10 +582,10 @@ function saveQuizResults(employeeID, score, percentage) {
 
 
 function handleQuizCompletion(employeeID, score, quizLength) {
-  
+  console.log("Handling quiz completion...");
   const percentage = Math.round((score / quizLength) * 100);
 
-
+  
   saveQuizResults(employeeID, score, percentage);
 }
 
