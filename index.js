@@ -191,7 +191,7 @@ function startQuiz() {
   nextBtn.disabled = false;
   // backBtn.disabled=false;
 
-  startTimer(0.1 * 60);
+  startTimer(20 * 60);
   document.getElementById('popupContainer').style.display = 'none';
   document.getElementById('quiz-container').style.display = 'block';
   
