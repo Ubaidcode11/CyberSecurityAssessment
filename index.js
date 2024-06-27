@@ -93,7 +93,7 @@ const quizData = [
       a: "Follow the pop-up instructions to get the free access",
       b: "Share the pop-up link with your friends",
       c: "Immediately close the pop-up and do not proceed",
-      d: "Click on any links provided within the Pop-up",
+      d: "Click on any links provided within the pop-up",
     
       correct: "c"
     },
