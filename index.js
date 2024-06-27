@@ -109,7 +109,7 @@ const quizData = [
     {
      question: "You receive an email with a link to a survey promising a gift card reward upon completion. What should you do?",
     a: "Click on the link and complete the survey to claim your reward",
-    b: "Contact the company for more information regarding the gift card",
+    b: "Save the email for later without taking any action",
     c: "Forward the email to your contacts to spread the opportunity",
     d: "Delete the email and mark it as spam",
     
@@ -146,7 +146,7 @@ const quizData = [
 
       a: "Provide the requested information to avoid any legal issues",
       b: "Politely decline and hang up",
-      c: "Ask for the caller's credentials and verify their identity",
+      c: "Ask the caller to email you the request instead",
       d: "Give false information to test the caller's legitimacy",
       
       correct: "b"
