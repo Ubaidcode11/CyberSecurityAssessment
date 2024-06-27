@@ -184,54 +184,25 @@ const backBtn = document.getElementById("backBtn");
 const nextBtn = document.getElementById("nextBtn");
 nextBtn.disabled = true;
 backBtn.addEventListener("click", previousQuestion);
+
 function startQuiz() {
   console.log('Quiz started');
   const employeeID = employeeIDInput.value.trim();
   console.log('Employee ID:', employeeID);
   nextBtn.disabled = false;
-  // backBtn.disabled=false;
+  // backBtn.disabled = false;
 
   startTimer(20 * 60);
   document.getElementById('popupContainer').style.display = 'none';
   document.getElementById('quiz-container').style.display = 'block';
-  
 }
 
 const saveBtn = document.getElementById("saveBtn");
 saveBtn.addEventListener("click", saveAnswer);
 nextBtn.addEventListener("click", nextQuestion);
 
-
-
-
-let userAnswers = []; 
-
-// function saveAnswer() {
-//   const answer = getSelected();
-//   const correctAnswer = quizData[currentQuiz].correct;
-  
-
-//   answerEl.forEach((answerEl) => {
-//     const id = answerEl.id;
-//     if (id === correctAnswer) {
-//       answerEl.parentElement.classList.add("correct");
-//     } else {
-//       if (id === answer) {
-//         answerEl.parentElement.classList.add("wrong");
-//       }
-//     }
-//   });
-
-
-//   const isCorrect = answer === correctAnswer;
-//   const feedback = document.createElement("p");
-//   //feedback.textContent = isCorrect ? "Correct" : "Incorrect";
-//   feedback.classList.add(isCorrect ? "correct-feedback" : "incorrect-feedback");
-//   footerEl.appendChild(feedback);
-
-//   saveBtn.disabled = true; 
-// }
-
+let userAnswers = [];
+let scoredQuestions = []; // New array to track scored questions
 
 const quiz = document.querySelector(".quiz-body");
 const answerEl = document.querySelectorAll(".answer");
@@ -251,7 +222,6 @@ let score = 0;
 
 loadQuiz();
 
-
 function loadQuiz() {
   deselectAnswers();
   markSavedAnswer();
@@ -265,8 +235,16 @@ function loadQuiz() {
   answerEl.forEach((answerEl) => {
     answerEl.disabled = false;
   });
+  if (currentQuiz === quizData.length - 1) {
+    nextBtn.innerText = "View Results";
+    nextBtn.removeEventListener("click", nextQuestion);
+    nextBtn.addEventListener("click", displayResults);
+  } else {
+    nextBtn.innerText = "Next";
+    nextBtn.removeEventListener("click", displayResults);
+    nextBtn.addEventListener("click", nextQuestion);
+  }
 }
-
 
 function deselectAnswers() {
   answerEl.forEach((answerEl) => {
@@ -280,7 +258,6 @@ function deselectAnswers() {
   });
 }
 
-
 function getSelected() {
   let answer;
   answerEl.forEach((answerEls) => {
@@ -291,83 +268,35 @@ function getSelected() {
   return answer;
 }
 
-
 function nextQuestion() {
   saveBtn.disabled = false;
-  
-  
-  let unansweredQuestions = 0;
-  for (let i = 0; i < quizData.length; i++) {
-    if (userAnswers[i] === undefined) {
-      unansweredQuestions++;
-    }
-  }
-  
-
-  if (unansweredQuestions > 0 && currentQuiz === quizData.length - 1) {
-    const confirmation = confirm(`You have ${unansweredQuestions} unanswered question(s). Are you sure you want to view results?`);
-    if (!confirmation) {
-      // resumeTimer();
-      return; 
-    }
-    stopTimer();
-  }
 
   currentQuiz++;
+
   if (currentQuiz < quizData.length) {
     loadQuiz();
-  } else {
-    
-    const headerTxt = document.querySelector(".header-txt");
-    headerTxt.textContent = "Results";
-    headerTxt.style.fontSize = "30px";
-    const scorePercentage = Math.round((score / quizData.length) * 100);
-    quiz.innerHTML = `<h1>You answered ${score}/${quizData.length} questions correctly</h1>
-    <div style="text-align: justify; padding-bottom:20px">
-    <h1>Your Score Percentage is ${scorePercentage}%</h1>
-    </div>
-    <button type="button" onclick="location.reload()">Reload</button>`;
-    footerEl.style.display = "none";
-    document.getElementById('timer').style.display = 'none';
-    handleQuizCompletion(employeeIDInput.value.trim(), score, quizData.length);
   }
 
   if (currentQuiz === quizData.length - 1) {
-    const btnSubmit = document.getElementById("nextBtn");
-    btnSubmit.innerText = "View Results";
-    btnSubmit.addEventListener("click", function () {
-      console.log("Submit button clicked");
-      // stopTimer();
-      const answers = getSelected();
-    
-      if (answers) {
-        const currentQuizData = quizData[currentQuiz];
-        const correctAnswer = currentQuizData.correct;
-    
-        if (answers === correctAnswer) {
-          score++; 
-        }
-    
-        nextQuestion(); 
-      }
-    });
+    nextBtn.innerText = "View Results";
+    nextBtn.removeEventListener("click", nextQuestion);
+    nextBtn.addEventListener("click", displayResults);
+  } else {
+    nextBtn.innerText = "Next";
+    nextBtn.removeEventListener("click", displayResults);
+    nextBtn.addEventListener("click", nextQuestion);
   }
 
-  backBtn.disabled = false; 
+  backBtn.disabled = false;
 }
-
-
-
-
-
 function saveAnswer() {
   const answer = getSelected();
   const correctAnswer = quizData[currentQuiz].correct;
   if (!answer) {
-    return; 
+    return;
   }
   if (userAnswers[currentQuiz] !== undefined) {
-    return; 
+    return;
   }
   answerEl.forEach((answerEl) => {
     const id = answerEl.id;
@@ -380,15 +309,12 @@ function saveAnswer() {
     }
   });
 
-
   const isCorrect = answer === correctAnswer;
   const feedback = document.createElement("p");
   feedback.classList.add(isCorrect ? "correct-feedback" : "incorrect-feedback");
   footerEl.appendChild(feedback);
-  
-  
+
   nextBtn.disabled = false;
-  // saveBtn.disabled = true; 
   if (userAnswers[currentQuiz] === undefined) {
     userAnswers[currentQuiz] = answer;
   }
@@ -397,11 +323,13 @@ function saveAnswer() {
   console.log("Correct Answer:", correctAnswer);
   console.log("Is Correct?", isCorrect);
 
-  if (isCorrect) {
-    score++; 
+  if (isCorrect && !scoredQuestions.includes(currentQuiz)) {
+    score++;
+    scoredQuestions.push(currentQuiz); // Mark the question as scored
     console.log("Score:", score);
   }
 }
+
 
 let timerRunning = true;
 let remainingTimeInSeconds = 20 * 60;
@@ -411,39 +339,36 @@ function startTimer(duration) {
   const timerDisplay = document.getElementById('timer');
 
   const intervalID = setInterval(function () {
-    console.log("Interval Running..."); 
-    if (!timerRunning){
+    console.log("Interval Running...");
+    if (!timerRunning) {
       clearInterval(intervalID);
       console.log("Timer Stopped");
-      
       return;
     }
-    console.log("Timer Running..."); 
+    console.log("Timer Running...");
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
 
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    
-    if (timer < 300) { 
-      timerDisplay.style.color = 'red'; 
+
+    if (timer < 300) {
+      timerDisplay.style.color = 'red';
     }
-  
+
     timerDisplay.textContent = minutes + ':' + seconds;
 
     if (--timer < 0) {
       timerDisplay.textContent = 'Time\'s up!';
       timerDisplay.style.fontSize = '28px';
-      timerDisplay.style.fontWeight="bold";
-      timerDisplay.style.color="black";
-      timerDisplay.style.PaddingBottom="11  px";
+      timerDisplay.style.fontWeight = "bold";
+      timerDisplay.style.color = "black";
+      timerDisplay.style.PaddingBottom = "11px";
       displayResults();
       clearInterval(intervalID);
     }
   }, 1000);
 }
-
-
 
 function stopTimer() {
   console.log("Stopping Timer...");
@@ -466,6 +391,7 @@ function displayResults() {
   <button type="button" onclick="location.reload()">Reload</button>`;
   footerEl.style.display = "none";
   stopTimer();
+  document.getElementById('timer').style.display = 'none';
   const quizLength = quizData.length;
   handleQuizCompletion(employeeIDInput.value.trim(), score, quizLength);
 }
@@ -474,9 +400,9 @@ function markSavedAnswer() {
   const savedAnswer = userAnswers[currentQuiz];
 
   if (!savedAnswer) {
-    return; 
+    return;
   }
-  
+
   answerEl.forEach((answerEl) => {
     if (answerEl.id === savedAnswer) {
       answerEl.checked = true;
@@ -486,28 +412,23 @@ function markSavedAnswer() {
         answerEl.parentElement.classList.add("correct");
       } else {
         answerEl.parentElement.classList.add("wrong");
-        
       }
     }
   });
 }
 
-
 function previousQuestion() {
   console.log("Navigating to previous question...");
-  // saveAnswer();
   currentQuiz--;
 
   if (currentQuiz >= 0) {
     loadQuiz();
-    markSavedAnswer(); 
-    
-    
+    markSavedAnswer();
+
     answerEl.forEach((answerEl) => {
       answerEl.disabled = false;
     });
 
-  
     if (currentQuiz === quizData.length - 2) {
       const btnSubmit = document.getElementById("nextBtn");
       btnSubmit.innerText = "Next";
@@ -519,8 +440,6 @@ function previousQuestion() {
     backBtn.disabled = true;
   }
 }
-
-
 
 
 const firebaseConfig = {
