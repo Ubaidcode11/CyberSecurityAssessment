@@ -470,14 +470,6 @@ const firebaseConfig = {
 };
 
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCtCGLBhTykXCZqsCVlucJ3jRj0KYXPwJ0",
-//   authDomain: "hrmscybersecurityapp.firebaseapp.com",
-//   projectId: "hrmscybersecurityapp",
-//   storageBucket: "hrmscybersecurityapp.appspot.com",
-//   messagingSenderId: "110720342130",
-//   appId: "1:110720342130:web:418c81073299eda05d0aeb"
-// };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
