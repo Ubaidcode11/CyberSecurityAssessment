@@ -12,14 +12,17 @@ Timer: A countdown timer adds a challenge element, encouraging users to respond 
 Objective:
 
 Educational Focus: The primary goal is to educate participants on recognizing and responding to cybersecurity threats effectively.
+
 Practical Learning: By simulating realistic scenarios, users can practice identifying phishing attempts, securing personal information, and safeguarding digital interactions.
 
 Implementation:
 
 Firebase Integration: Results are stored securely using Firebase Firestore, enabling the tracking and analysis of quiz performance over time.
+
 User-Friendly Interface: The quiz is accessible via a web browser, ensuring ease of use for participants across different devices.
 
 Impact:
 
 Empowering Users: Enhancing cybersecurity knowledge empowers users to protect themselves and their information in today's digital landscape.
+
 Continuous Improvement: Results data can inform future updates and enhancements to the quiz content, ensuring relevance and effectiveness in cybersecurity education.
