@@ -388,7 +388,7 @@ function displayResults() {
   <div style="text-align: justify; padding-bottom:20px">
   <h1>Your Score Percentage is ${scorePercentage}%</h1>
   </div>
-  <button type="button" onclick="location.reload()">Reload</button>`;
+  <button type="button" onclick="location.reload()">Retake</button>`;
   footerEl.style.display = "none";
   stopTimer();
   document.getElementById('timer').style.display = 'none';
