@@ -410,7 +410,7 @@ function displayResults() {
   stopTimer();
   document.getElementById('timer').style.display = 'none';
   const quizLength = quizData.length;
-  handleQuizCompletion(employeeIDInput.value.trim(), score, quizLength);
+  handleQuizCompletion(employeeIDInput.value.trim(), score, quizLength,scorePercentage,remark);
 }
 
 function markSavedAnswer() {
@@ -470,6 +470,15 @@ const firebaseConfig = {
 };
 
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCtCGLBhTykXCZqsCVlucJ3jRj0KYXPwJ0",
+//   authDomain: "hrmscybersecurityapp.firebaseapp.com",
+//   projectId: "hrmscybersecurityapp",
+//   storageBucket: "hrmscybersecurityapp.appspot.com",
+//   messagingSenderId: "110720342130",
+//   appId: "1:110720342130:web:418c81073299eda05d0aeb"
+// };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -500,15 +509,16 @@ startAssessmentBtn.addEventListener('click', function() {
 });
 
 
-function saveQuizResults(employeeID, score, percentage) {
+function saveQuizResults(employeeID, score, percentage,remark) {
  
   
-    console.log("Saving quiz results:", employeeID, score, percentage);
+    console.log("Saving quiz results:", employeeID, score, percentage,remark);
 
     db.collection("quizResults").add({
       employeeID: employeeID,
       score: score,
       percentage: percentage,
+      remark: remark,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(function(docRef) {
@@ -521,12 +531,12 @@ function saveQuizResults(employeeID, score, percentage) {
 
 
 
-function handleQuizCompletion(employeeID, score, quizLength) {
+function handleQuizCompletion(employeeID, score, quizLength, scorePercentage, remark) {
   console.log("Handling quiz completion...");
-  const percentage = Math.round((score / quizLength) * 100);
+  // const percentage = Math.round((score / quizLength) * 100);
 
   
-  saveQuizResults(employeeID, score, percentage);
+  saveQuizResults(employeeID, score, scorePercentage, remark);
 }
 
 
@@ -535,6 +545,5 @@ function quizCompleted() {
   const quizLength = quizData.length; 
   
 }
-
 
 
