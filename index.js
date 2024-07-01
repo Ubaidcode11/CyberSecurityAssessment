@@ -384,11 +384,28 @@ function displayResults() {
   headerTxt.textContent = "Results";
   headerTxt.style.fontSize = "30px";
   const scorePercentage = Math.round((score / quizData.length) * 100);
-  quiz.innerHTML = `<h1>You answered ${score}/${quizData.length} questions correctly</h1>
-  <div style="text-align: justify; padding-bottom:20px">
-  <h1>Your Score Percentage is ${scorePercentage}%</h1>
-  </div>
-  <button type="button" onclick="location.reload()">Retake</button>`;
+  let remark = "";
+  if (scorePercentage >= 90) {
+    remark = "Excellent!";
+  } else if (scorePercentage >= 75) {
+    remark = "Good";
+  } else if (scorePercentage >= 50) {
+    remark = "Above Average";
+  } else if (scorePercentage > 35) {
+    remark = "Below Average";
+  } else {
+    remark = "Retake the quiz";
+  }
+  quiz.innerHTML = `
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+      <h1 style="font-size: 24px; margin-bottom: 10px;">You answered ${score}/${quizData.length} questions correctly</h1>
+      <div style="text-align: center; padding-bottom: 20px;">
+        <h1 style="font-size: 24px; margin-bottom: 5px;">Your Score Percentage is ${scorePercentage}%</h1>
+        <h2 style="font-size: 24px; margin-bottom: 15px; text-align: center;">Remark: ${remark}</h2>
+      </div>
+      <button type="button" onclick="location.reload()" style="padding: 10px 20px; font-size: 18px; background-color: #007bff; color: white; border: none; cursor: pointer;">Retake</button>
+    </div>
+  `;
   footerEl.style.display = "none";
   stopTimer();
   document.getElementById('timer').style.display = 'none';
