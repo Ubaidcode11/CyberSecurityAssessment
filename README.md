@@ -5,8 +5,11 @@ This project is designed to educate users about cybersecurity best practices thr
 Key Features:
 
 Quiz Format: Users navigate through a series of multiple-choice questions based on cybersecurity scenarios.
+
 Interactive Learning: Immediate feedback on user responses helps reinforce understanding of correct security practices.
+
 Scoring and Results: At the end of the quiz, users receive a score based on their correct answers, along with a percentage and a remark indicating their cybersecurity awareness level.
+
 Timer: A countdown timer adds a challenge element, encouraging users to respond promptly and simulate real-time decision-making under pressure.
 
 Objective:
