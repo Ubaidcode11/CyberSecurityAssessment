@@ -29,8 +29,4 @@ The **Cybersecurity Awareness Quiz Application** is designed to educate employee
 - **Empowering Employees**: Enhancing cybersecurity knowledge empowers employees to protect themselves and organizational information in today’s digital landscape.
 - **Continuous Improvement**: Results data will inform future updates and enhancements to the quiz content, ensuring its relevance and effectiveness in cybersecurity education.
 
-## 📝 Installation and Usage
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/cybersecurity-awareness-quiz.git
